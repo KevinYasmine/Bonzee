@@ -319,6 +319,25 @@ public class BonzeeBoard {
         return true;
     }
 
+    private String prettyCoordinate(int y){
+        String coord = "";
+        switch(y)
+        {
+            case 1: coord = "A";
+            break;
+            case 2: coord = "B";
+                break;
+            case 3: coord = "C";
+                break;
+            case 4: coord = "D";
+                break;
+            case 5: coord = "E";
+                break;
+        }
+        return coord;
+    }
+
+
     public void startGame(){
 
         initializeBoard();
@@ -350,10 +369,13 @@ public class BonzeeBoard {
             // if the move was successfully parsed to valid values
             if (validMove) {
                 moveToken(startX, startY, endX, endY);
-
                 // display the new state of the game board
                 displayBoard(bonzeeBoard);
-
+                if (!greenTurn) {
+                    System.out.println("GREEN" + ANSI_RESET + " moved from " +  prettyCoordinate(startY) + Integer.toString(startX) + " to " + prettyCoordinate(endY) + Integer.toString(endX) + ".");
+                } else {
+                    System.out.println("RED" + ANSI_RESET + " moved from " +  prettyCoordinate(startY) + Integer.toString(startX) + " to " + prettyCoordinate(endY) + Integer.toString(endX) + ".");
+                }
                 // check for a winner
                 if (isGameOver()){
                     System.exit(0);
